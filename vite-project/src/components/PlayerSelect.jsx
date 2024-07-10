@@ -1,34 +1,21 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+//import { useState } from 'react';
 
 function PlayerSelect() {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+  //const [player1, setPlayer1] = useState('X');
+  //const [player2, setPlayer2] = useState('O');
   return (
-    <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+    <div className='bg-secondary col-12 p-2'>
+     <h2>Choose your weapon!</h2>
+     <div className='row'>
+      <input className="col-3 ms-auto" type="text" name="player1" id="p1" />
+      <input className="col-3 me-auto" type="text" name="player2" id="p2" />
+     </div>
+     <div className='row'>
+      <button className="col-3 ms-auto" onClick={() => {console.log('X')}}>X</button>
+      <button className="col-3 me-auto px-2" onClick={() => {console.log('O')}}>O</button>
+     </div>
+      
+    </div>
   );
 }
 

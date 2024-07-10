@@ -7,7 +7,7 @@ import PlayerSelect from './components/PlayerSelect.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
-  const [message, setMessage] = useState('Choose your weapon!')
+  const [message, setMessage] = useState('Choose A weapon!')
   const [grid, setGrid] = useState([['','',''],['','',''],['','','']])
   const [player, setPlayer] = useState('X')
 
@@ -16,9 +16,11 @@ function App() {
       <h1>
         Tic Tac Toe
       </h1>
-      <PlayerSelect />
+      
       <h2>{message}</h2>
-      <Grid grid={grid}/>
+      {<PlayerSelect /> ||
+      <Grid grid={grid} show='none'/>
+      }
     </>
   )
 }
