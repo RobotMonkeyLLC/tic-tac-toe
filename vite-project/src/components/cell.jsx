@@ -1,9 +1,6 @@
-const onClick = (e) => {
-    console.log('clicked',e.target);
-}
-export default function Cell({value, onClick=onClick}) {
+export default function Cell({value, onClick}) {
     return (
-        <div className="cell" onClick={(e) => onClick(e)} >
+        <div className="cell" onClick={() => onClick()} >
             {value}
         </div>
     );

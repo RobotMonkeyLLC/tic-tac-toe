@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
-function PlayerSelect({setPlayer, setPlayer1,setPlayer2, setStartGame}) {
+function PlayerSelect({setPlayer, setPlayer1,setPlayer2, setStartGame, setGrid}) {
 
   const startGame = (piece) => {
     if(document.getElementById("p1").value == '' || document.getElementById("p2").value == '') {
       alert('Please enter your names!');
     } else {
       setStartGame(true);
+      setGrid([['','',''],['','',''],['','','']]);
       setPlayer(piece);
     }
   }

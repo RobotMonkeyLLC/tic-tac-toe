@@ -17,32 +17,47 @@ function App() {
   //update message
   useEffect(() => {
     if (startGame === true) {
-      setMessage(`${player === 'X' ? player1 : player2}'s turn`);
+      setMessage(`${player === 'X' ? player1 : player2}'s turn! Play ${player}!`);
     }
   }, [player, player1, player2, startGame]);
 
   useEffect(() => {
-    const lines = [
-      [[0,0], [0,1], [0,2]],
-      [[1,0], [1,1], [1,2]],
-      [[2,0], [2,1], [2,2]],
-      [[0,0], [1,0], [2,0]],
-      [[0,1], [1,1], [2,1]],
-      [[0,2], [1,2], [2,2]],
-      [[0,0], [1,1], [2,2]],
-      [[0,2], [1,1], [2,0]],
-  ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-      if (grid[a[0]][a[1]] && grid[a[0]][a[1]] === grid[b[0]][b[1]] && grid[a[0]][a[1]] === grid[c[0]][c[1]]) {
-        setMessage(`${player === 'X' ? player1 : player2} wins!`);
+    const checkWinner = () => {
+      //check rows
+      for (let i = 0; i < 3; i++) {
+        if (grid[i][0] === grid[i][1] && grid[i][1] === grid[i][2] && grid[i][0] !== '') {
+          setMessage(`${grid[i][0]} wins!`);
+          setStartGame(false);
+          return;
+        }
+      }
+      //check columns
+      for (let i = 0; i < 3; i++) {
+        if (grid[0][i] === grid[1][i] && grid[1][i] === grid[2][i] && grid[0][i] !== '') {
+          setMessage(`${grid[0][i]} wins!`);
+          setStartGame(false);
+          return;
+        }
+      }
+      //check diagonals
+      if (grid[0][0] === grid[1][1] && grid[1][1] === grid[2][2] && grid[0][0] !== '') {
+        setMessage(`${grid[0][0]} wins!`);
         setStartGame(false);
+        return;
+      }
+      if (grid[0][2] === grid[1][1] && grid[1][1] === grid[2][0] && grid[0][2] !== '') {
+        setMessage(`${grid[0][2]} wins!`);
+        setStartGame(false);
+        return;
+      }
+      //check draw
+      if (grid.every(row => row.every(cell => cell !== ''))) {
+        setMessage('Draw!');
+        setStartGame(false);
+        return;
       }
     }
-    if (grid.every(row => row.every(cell => cell))) {
-      setMessage('Draw!');
-      setStartGame(false);
-    }
+    checkWinner();  
   }, [grid]);
 
   return (
@@ -61,7 +76,8 @@ function App() {
         setPlayer={setPlayer} 
         setPlayer1={setPlayer1} 
         setPlayer2={setPlayer2} 
-        setStartGame={setStartGame}/>
+        setStartGame={setStartGame}
+        setGrid={setGrid}/>
       }
     </>
   )

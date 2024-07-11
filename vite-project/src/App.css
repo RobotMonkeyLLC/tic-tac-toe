@@ -59,6 +59,6 @@ body {
   height: 4em;
   font-size: 2em;
   cursor: pointer;
-  border: #888 solid;
+  border: #888 solid 1px;
   align-items: center;
 }

@@ -9,17 +9,22 @@ export default function Grid({ grid, setGrid , player, setPlayer}) {
         setPlayer(player === 'X' ? 'O' : 'X');
     }
 
+    const clearGrid = () => {
+        setGrid([['','',''],['','',''],['','','']]);
+    }
     return (
         <div className="grid">
-            <button onClick={() => setGrid([['','',''],['','',''],['','','']])}>Reset</button>
+            <button onClick={clearGrid} className='my-3'>Reset</button>
+            <div>
+                {grid.map((row, i) => (
+                    <div key={i} className="row">
+                        {row.map((cell, j) => (
+                            <Cell key={j} value={cell} onClick={updateCell(i, j)} />
+                        ))}
+                    </div>
+                ))}
+            </div>
             
-            {grid.map((row, i) => (
-                <div key={i} className="row">
-                    {row.map((cell, j) => (
-                        <Cell key={[i,j]} value={cell} onClick={updateCell(i,j)}/>
-                    ))}
-                </div>
-            ))}
         </div>
     );
 }
